@@ -17,6 +17,14 @@ class UsersController < ApplicationController
     end
   end
 
+  get '/dreams' do
+    if logged_in?
+      @user = current_user
+      erb :'/dreams/dreams'
+    else redirect '/login'
+    end
+  end
+
   helpers do
     def logged_in?
       !!session[:user_id]

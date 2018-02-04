@@ -2,6 +2,9 @@
 
 <h2>Dreams</h2>
 
+<ul>
 <% Dream.all.each do |dream| %>
-    <p> <%= dream.story %> </p>
+    <li> <%= dream.date %>: <%= dream.story %> </li>
+    <br>
 <% end %>
+</ul>
