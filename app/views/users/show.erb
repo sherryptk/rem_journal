@@ -1,3 +1,8 @@
+<h2><%=@user.username %>'s Dreams</h2>
+
+<ul>
 <% @user.dreams.each do |dream| %>
-  <p> <%=dream.story%> </p>
-  <% end %>
+    <li> <a href='/dreams/<%=dream.id%>'><%= dream.date.strftime("%b %d, %Y") %></a>: <%= dream.story %></a></p></li>
+    <br>
+<% end %>
+</ul>
