@@ -21,7 +21,6 @@ class DreamsController < ApplicationController
     if params[:content] == ""
       redirect to '/dreams/new'
     else
-      # @dream = current_user.dreams.create(:date=> params["date"], :content=> params["content"])
       @dream = current_user.dreams.create(date: params["date"], story: params["story"] )
       id = @dream.id
       if !params["theme"]["name"].empty?
@@ -37,6 +36,28 @@ class DreamsController < ApplicationController
       erb :'/dreams/show_dream'
     else
       redirect to '/login'
+    end
+  end
+
+  get '/dreams/:id/edit' do
+    if logged_in?
+      @dream = Dream.all.find(params[:id])
+      erb :'dreams/edit_dream'
+    else
+      redirect to '/login'
+    end
+  end
+
+  patch '/dreams/:id' do
+    @dream = Dream.all.find(params[:id])
+    id = @dream.id
+
+    if params[:content] == ""
+      redirect to "/dreams/#{id}/edit"
+    else
+      @dream.story = params[:content]
+      @dream.save
+      redirect to "/dreams/#{id}"
     end
   end
 
