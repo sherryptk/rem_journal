@@ -1,4 +1,5 @@
 class Dream < ActiveRecord::Base
   belongs_to :user
-  belongs_to :theme
+  has_many :dream_themes
+  has_many :themes, through: :dream_themes
 end

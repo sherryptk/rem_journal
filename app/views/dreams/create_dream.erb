@@ -2,6 +2,16 @@
 
 <form method="post" action="/dreams" id="form">
   Date: <input id="date" type="date"><br><br>
-  Description: <br><br> <textarea name="story" rows="10" cols="50"></textarea><br><br>
-  <input type="submit" value="submit" id="submit">
+  Description: <br><br>
+  <textarea name="story" rows="10" cols="50"></textarea><br><br>
+  Choose a theme:
+  <%@themes.each do |theme|%>
+      <input type="checkbox" name="dream[theme_ids][]" value="<%=theme.id%>" id="<%=theme.id%>"><%=theme.name%></input>
+  <%end%>
+<br></br>
+and/or, create a new theme:<br></br>
+  <input  type="text" name="theme[name]"></input>
+    <br></br>
+
+  <input type="submit" value="Create Dream">
 </form>

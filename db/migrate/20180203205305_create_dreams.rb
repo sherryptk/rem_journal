@@ -4,7 +4,6 @@ class CreateDreams < ActiveRecord::Migration
       t.string :story
       t.date :date
       t.integer :user_id
-      t.integer :theme_id
     end
   end
 end

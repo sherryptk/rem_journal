@@ -1,4 +1,4 @@
 class Theme < ActiveRecord::Base
-  has_many :dreams
-  has_many :users, through: :dreams
+  has_many :dream_themes
+  has_many :dreams, through: :dream_themes
 end
