@@ -7,7 +7,7 @@
 
 <ul>
 <% Dream.all.each do |dream| %>
-    <li> <%= dream.date %>: <%= dream.story %> </li>
+    <li> <a href='/dreams/<%=dream.id%>'><%= dream.date.strftime("%b %d, %Y") %></a>: <%= dream.story %> </li>
     <br>
 <% end %>
 </ul>
