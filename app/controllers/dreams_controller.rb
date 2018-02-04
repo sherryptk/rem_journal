@@ -70,4 +70,14 @@ class DreamsController < ApplicationController
     end
   end
 
+  delete '/dreams/:id/delete' do
+    @dream = Dream.all.find(params[:id])
+    if logged_in? && current_user.id == @dream.user.id
+      @dream.destroy
+      redirect to "/dreams"
+    else
+      redirect to '/dreams'
+    end
+  end
+
 end
