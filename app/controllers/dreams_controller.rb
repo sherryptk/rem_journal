@@ -22,8 +22,7 @@ class DreamsController < ApplicationController
       redirect to '/dreams/new'
     else
       # @dream = current_user.dreams.create(:date=> params["date"], :content=> params["content"])
-
-      @dream = current_user.dreams.create(params["dream"])
+      @dream = current_user.dreams.create(date: params["date"], story: params["story"] )
       id = @dream.id
       if !params["theme"]["name"].empty?
       @dream.themes << Theme.create(name: params["theme"]["name"])

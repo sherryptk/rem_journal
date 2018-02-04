@@ -11,13 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180203205321) do
+ActiveRecord::Schema.define(version: 20180204153249) do
+
+  create_table "dream_themes", force: :cascade do |t|
+    t.integer "dream_id"
+    t.integer "theme_id"
+  end
 
   create_table "dreams", force: :cascade do |t|
     t.string  "story"
     t.date    "date"
     t.integer "user_id"
-    t.integer "theme_id"
   end
 
   create_table "themes", force: :cascade do |t|
