@@ -1,8 +1,9 @@
 require 'sinatra/base'
 require 'rack-flash'
+
 class DreamsController < ApplicationController
   enable :sessions
-   use Rack::Flash
+  use Rack::Flash
 
   get '/dreams' do
     if logged_in?
@@ -30,6 +31,7 @@ class DreamsController < ApplicationController
       if !params["theme"]["name"].empty?
       @dream.themes << Theme.create(name: params["theme"]["name"])
     end
+    flash[:message] = "You have successfully logged a dream!"
       redirect to "/dreams/#{id}"
     end
   end
