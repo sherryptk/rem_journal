@@ -48,6 +48,33 @@ end
     redirect '/login'
   end
 
+  get '/dreams/new' do
+    if logged_in?
+      erb :'/dreams/create_dream'
+    else
+      redirect to '/login'
+    end
+  end
+
+  post '/dreams' do
+    if params[:content] == ""
+      redirect to '/dreams/new'
+    else
+      @dream = current_user.dreams.create(:date=> params["date"], :content=> params["content"])
+      id = @dream.id
+      redirect to "/dreams/#{id}"
+    end
+  end
+
+  get '/dreams/:id' do
+    if logged_in?
+      @dream = Dream.all.find(params[:id])
+      erb :'/dreams/show_dream'
+    else
+      redirect to '/login'
+    end
+  end
+
   helpers do
     def logged_in?
       !!session[:user_id]

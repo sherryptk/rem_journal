@@ -1,0 +1,11 @@
+<h1> Dream </h1>
+<p> <%= @dream.story %> </p>
+
+<a href='/dream/<%= @dream.id%>/edit'>Edit Dream</a>
+
+<br></br>
+
+<form method="post" action="/dreams/<%= @dream.id %>/delete">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Dream">
+</form>
