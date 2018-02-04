@@ -2,9 +2,19 @@ class UsersController < ApplicationController
 
   get '/signup' do
     if logged_in?
-      redirect to '/tweets'
+      redirect to '/dreams'
     end
     erb :'/users/create_user'
+  end
+
+  post '/signup' do
+    if params[:username] == '' || params[:email] == '' || params[:password] == ''
+    redirect to '/signup'
+    else
+      @user = User.create(username: params["username"], email: params["email"], password: params["password"])
+        session[:user_id] = @user.id
+        redirect to '/dreams'
+    end
   end
 
   helpers do
@@ -16,5 +26,5 @@ class UsersController < ApplicationController
       User.find(session[:user_id])
     end
   end
-  
+
 end

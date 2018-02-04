@@ -1,0 +1,7 @@
+<h1> Welcome, <%= @user.username %> </h1>
+
+<h2>Dreams</h2>
+
+<% Dream.all.each do |dream| %>
+    <p> <%= dream.story %> </p>
+<% end %>
