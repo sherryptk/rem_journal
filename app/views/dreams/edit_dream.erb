@@ -1,15 +1,13 @@
 <h3>Edit Dream </h3>
 
-<p> <%= @dream.date.strftime("%b %d, %Y") %> </p>
 <form method="post" action='/dreams/<%= @dream.id %>'>
   <input id="hidden" type="hidden" name="_method" value="patch">
-  Edit date: <input type="text" name="date" value="mm/dd/yyyy"id="date"><br><br>
-  <p> Current story: <%= @dream.story %> </p>
+  Edit date: <input type="text" name="dream[date]" value='<%=@dream.date.strftime("%m/%d/%Y")%>'id="date"><br><br>
   Edit story: <br><br>
-  <textarea name="story" rows="10" cols="50"></textarea><br><br>
+  <textarea name="dream[story]" rows="10" cols="50"><%= @dream.story %></textarea><br><br>
   Change themes:
   <%@dream.themes.each do |theme|%>
-      <input type="checkbox" name="dream[theme_ids][]" value="<%=theme.id%>" id="<%=theme.id%>"<%='checked' if @dream.themes.include?(theme) %>><%=theme.name%></input>
+      <input type="checkbox" name="dream[themes][]" value="<%=theme.id%>" id="<%=theme.id%>"<%='checked' if @dream.themes.include?(theme) %>><%=theme.name%></input>
   <%end%>
 <br></br>
 and/or, create a new theme:<br></br>

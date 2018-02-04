@@ -1,9 +1,9 @@
 <h2>Record a Dream</h2>
 
 <form method="post" action="/dreams" id="form">
-  Date: <input type="text" name="date" value="mm/dd/yyyy"id="date"><br><br>
+  Date: <input type="text" name="dream[date]" value="mm/dd/yyyy"id="date"><br><br>
   Description: <br><br>
-  <textarea name="story" rows="10" cols="50"></textarea><br><br>
+  <textarea name="dream[story]" rows="10" cols="50"></textarea><br><br>
   Choose a theme:
   <%@themes.each do |theme|%>
       <input type="checkbox" name="dream[theme_ids][]" value="<%=theme.id%>" id="<%=theme.id%>"><%=theme.name%></input>
