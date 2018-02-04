@@ -1,4 +1,6 @@
+
 class ApplicationController < Sinatra::Base
+
 
   register Sinatra::ActiveRecordExtension
   enable :sessions
@@ -19,5 +21,5 @@ class ApplicationController < Sinatra::Base
       User.find(session[:user_id])
     end
   end
-  
+
 end

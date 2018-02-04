@@ -1,4 +1,8 @@
+require 'sinatra/base'
+require 'rack-flash'
 class DreamsController < ApplicationController
+  enable :sessions
+   use Rack::Flash
 
   get '/dreams' do
     if logged_in?
