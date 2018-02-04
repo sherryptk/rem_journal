@@ -1,20 +1,19 @@
-<h1>Edit Dream </h1>
+<h3>Edit Dream </h3>
 
-<p> <%= @dream.content %> </p>
-
-
+<p> <%= @dream.date.strftime("%b %d, %Y") %> </p>
 <form method="post" action='/dreams/<%= @dream.id %>'>
   <input id="hidden" type="hidden" name="_method" value="patch">
-  Date: <input type="text" name="date" value="mm/dd/yyyy"id="date"><br><br>
-  Description: <br><br>
+  Edit date: <input type="text" name="date" value="mm/dd/yyyy"id="date"><br><br>
+  <p> Current story: <%= @dream.story %> </p>
+  Edit story: <br><br>
   <textarea name="story" rows="10" cols="50"></textarea><br><br>
-  Choose a theme:
-  <%@themes.each do |theme|%>
-      <input type="checkbox" name="dream[theme_ids][]" value="<%=theme.id%>" id="<%=theme.id%>"<%='checked' if @dream.themes.include?(theme) %>>><%=theme.name%></input>
+  Change themes:
+  <%@dream.themes.each do |theme|%>
+      <input type="checkbox" name="dream[theme_ids][]" value="<%=theme.id%>" id="<%=theme.id%>"<%='checked' if @dream.themes.include?(theme) %>><%=theme.name%></input>
   <%end%>
 <br></br>
 and/or, create a new theme:<br></br>
   <input  type="text" name="theme[name]"></input>
     <br></br>
-  <input type="submit" value="Edit Dream" id="submit">
+  <input type="submit" value="Update Dream" id="submit">
 </form>

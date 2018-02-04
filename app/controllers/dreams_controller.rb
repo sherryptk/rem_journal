@@ -52,10 +52,13 @@ class DreamsController < ApplicationController
     @dream = Dream.all.find(params[:id])
     id = @dream.id
 
-    if params[:content] == ""
+    if params[:story] == ""
       redirect to "/dreams/#{id}/edit"
     else
-      @dream.story = params[:content]
+      @dream.update(params["dream"])
+      if !params["dream"]["theme"].empty?
+      @dream.themes << Theme.create(name: params["theme"]["name"])
+      end
       @dream.save
       redirect to "/dreams/#{id}"
     end
