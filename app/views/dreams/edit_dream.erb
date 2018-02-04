@@ -7,7 +7,7 @@
   <textarea name="dream[story]" rows="10" cols="50"><%= @dream.story %></textarea><br><br>
   Change themes:
   <%@dream.themes.each do |theme|%>
-      <input type="checkbox" name="dream[themes][]" value="<%=theme.id%>" id="<%=theme.id%>"<%='checked' if @dream.themes.include?(theme) %>><%=theme.name%></input>
+      <input type="checkbox" name="dream[theme_ids][]" value="<%=theme.id%>" id="<%=theme.id%>"<%='checked' if @dream.themes.include?(theme) %>><%=theme.name%></input>
   <%end%>
 <br></br>
 and/or, create a new theme:<br></br>

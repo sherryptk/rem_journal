@@ -51,15 +51,20 @@ class DreamsController < ApplicationController
   patch '/dreams/:id' do
     @dream = Dream.all.find(params[:id])
     id = @dream.id
+    updated_themes = []
 
     if params[:story] == ""
       redirect to "/dreams/#{id}/edit"
     else
-      @dream.update(params["dream"])
-      if !params["theme"]["name"].empty?
-      @dream.themes << Theme.create(name: params["theme"]["name"])
+      @dream.update(params[:dream])
+      params[:dream][:theme_ids].each do |theme_id|
+        updated_themes << Theme.all.find(theme_id)
       end
-      binding.pry 
+      @dream.themes = updated_themes
+
+      if !params[:theme][:name].empty?
+      @dream.themes << Theme.create(name: params[:theme][:name])
+      end
       @dream.save
       redirect to "/dreams/#{id}"
     end
