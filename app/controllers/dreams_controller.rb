@@ -57,10 +57,13 @@ class DreamsController < ApplicationController
       redirect to "/dreams/#{id}/edit"
     else
       @dream.update(params[:dream])
+
+      if params[:dream][:theme_ids] != nil
       params[:dream][:theme_ids].each do |theme_id|
         updated_themes << Theme.all.find(theme_id)
+        end
+        @dream.themes = updated_themes
       end
-      @dream.themes = updated_themes
 
       if !params[:theme][:name].empty?
       @dream.themes << Theme.create(name: params[:theme][:name])
