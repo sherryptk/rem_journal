@@ -23,7 +23,8 @@ class DreamsController < ApplicationController
   end
 
   post '/dreams' do
-    if params[:content] == ""
+    if params[:dream][:content] == nil || params[:dream][:date] == nil
+      flash[:message] = "Be sure not to leave any fields blank before submitting."
       redirect to '/dreams/new'
     else
       @dream = current_user.dreams.create(params["dream"])
@@ -77,6 +78,8 @@ class DreamsController < ApplicationController
         @dream.themes << Theme.create(name: params[:theme][:name])
         end
         @dream.save
+        flash[:message] = "You have successfully updated a dream!"
+
         redirect to "/dreams/#{id}"
       end
       redirect to "/dreams"

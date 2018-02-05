@@ -2,7 +2,10 @@
 
 <ul>
 <% @user.dreams.each do |dream| %>
-    <li> <a href='/dreams/<%=dream.id%>'><%= dream.date.strftime("%b %d, %Y") %></a>: <%= dream.story %></a></p></li>
+    <li> <a href='/dreams/<%=dream.id%>'><%= dream.date %></a>: <%= dream.story %></a></p></li>
     <br>
 <% end %>
 </ul>
+
+
+<!-- .strftime("%b %d, %Y") -->
