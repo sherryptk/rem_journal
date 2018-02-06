@@ -23,14 +23,14 @@ class DreamsController < ApplicationController
   end
 
   post '/dreams' do
-    if params[:dream][:content] == nil || params[:dream][:date] == nil
+    if params[:dream][:story] == "" || params[:dream][:date] == "mm/dd/yyyy" || params[:dream][:date] == ""
       flash[:message] = "Be sure not to leave any fields blank before submitting."
       redirect to '/dreams/new'
     else
-      @dream = current_user.dreams.create(params["dream"])
+      @dream = current_user.dreams.create(params[:dream])
       id = @dream.id
-      if !params["theme"]["name"].empty?
-      @dream.themes << Theme.create(name: params["theme"]["name"])
+      if !params[:theme][:name].empty?
+      @dream.themes << Theme.find_or_create_by(name: params[:theme][:name])
     end
     flash[:message] = "You have successfully logged a dream!"
       redirect to "/dreams/#{id}"
