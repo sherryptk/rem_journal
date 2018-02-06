@@ -9,7 +9,8 @@ class DreamsController < ApplicationController
     if logged_in?
       @user = current_user
       erb :'/dreams/dreams'
-    else redirect '/login'
+    else
+      redirect '/login'
     end
   end
 
@@ -29,17 +30,17 @@ class DreamsController < ApplicationController
     else
       @dream = current_user.dreams.create(params[:dream])
       id = @dream.id
-      if !params[:theme][:name].empty?
+    if !params[:theme][:name].empty?
       @dream.themes << Theme.find_or_create_by(name: params[:theme][:name])
+      flash[:message] = "You have successfully logged a dream!"
     end
-    flash[:message] = "You have successfully logged a dream!"
       redirect to "/dreams/#{id}"
     end
   end
 
   get '/dreams/:id' do
     if logged_in?
-      @dream = Dream.all.find(params[:id])
+      @dream = current_dream
       erb :'/dreams/show_dream'
     else
       redirect to '/login'
@@ -48,7 +49,7 @@ class DreamsController < ApplicationController
 
   get '/dreams/:id/edit' do
     if logged_in?
-      @dream = Dream.all.find(params[:id])
+      @dream = current_dream
       erb :'dreams/edit_dream'
     else
       redirect to '/login'
@@ -56,44 +57,47 @@ class DreamsController < ApplicationController
   end
 
   patch '/dreams/:id' do
-    @dream = Dream.all.find(params[:id])
+    @dream = current_dream
 
     if logged_in? && current_user.id == @dream.user.id
       id = @dream.id
       updated_themes = []
 
       if params[:story] == ""
+        flash[:message] = "You haven't made any changes!"
         redirect to "/dreams/#{id}/edit"
       else
         @dream.update(params[:dream])
 
         if params[:dream][:theme_ids] != nil
-        params[:dream][:theme_ids].each do |theme_id|
+          params[:dream][:theme_ids].each do |theme_id|
           updated_themes << Theme.all.find(theme_id)
-          end
+        end
           @dream.themes = updated_themes
         end
 
         if !params[:theme][:name].empty?
-        @dream.themes << Theme.create(name: params[:theme][:name])
+          @dream.themes << Theme.find_or_create_by(name: params[:theme][:name])
         end
+
         @dream.save
         flash[:message] = "You have successfully updated a dream!"
-
         redirect to "/dreams/#{id}"
       end
       redirect to "/dreams"
     else
+      flash[:message] = "You cannot edit another user's dream."
       redirect to '/dreams'
     end
   end
 
   delete '/dreams/:id/delete' do
-    @dream = Dream.all.find(params[:id])
+    @dream = current_dream
     if logged_in? && current_user.id == @dream.user.id
       @dream.destroy
       redirect to "/dreams"
     else
+      flash[:message] = "You cannot delete another user's dream."
       redirect to '/dreams'
     end
   end

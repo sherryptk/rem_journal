@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     if logged_in?
       redirect to '/dreams'
     end
-    erb :'/users/create_user'
+      erb :'/users/create_user'
   end
 
   post '/signup' do
@@ -21,19 +21,19 @@ class UsersController < ApplicationController
       redirect to '/signup'
     else
       @user = User.create(username: params[:username], email: params[:email], password: params[:password])
-        session[:user_id] = @user.id
-        flash[:message] = "You have successfully signed up!"
-        redirect to '/dreams'
+      session[:user_id] = @user.id
+      flash[:message] = "You have successfully signed up!"
+      redirect to '/dreams'
     end
   end
 
   get '/login' do
-  if logged_in?
-    redirect to '/dreams'
-  else
-    erb :'/users/login'
+    if logged_in?
+      redirect to '/dreams'
+    else
+      erb :'/users/login'
+    end
   end
-end
 
   post '/login' do
     @user = User.find_by(username: params[:username])
@@ -42,7 +42,7 @@ end
         flash[:message] = "You have successfully logged in!"
         redirect to '/dreams'
     else
-      flash[:message] = "Sorry, invalid login. Please try again."
+        flash[:message] = "Sorry, invalid login. Please try again."
         redirect "/login"
     end
   end

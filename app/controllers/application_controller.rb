@@ -20,6 +20,10 @@ class ApplicationController < Sinatra::Base
     def current_user
       User.find(session[:user_id])
     end
+
+    def current_dream
+      Dream.all.find(params[:id])
+    end
   end
 
 end
