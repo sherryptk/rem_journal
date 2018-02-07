@@ -8,10 +8,9 @@
   <%@themes.each do |theme|%>
       <input type="checkbox" name="dream[theme_ids][]" value="<%=theme.id%>" id="<%=theme.id%>"><%=theme.name%></input>
   <%end%>
-<br></br>
-and/or, create a new theme:<br></br>
+  <br></br>
+  and/or, create a new theme:<br></br>
   <input  type="text" name="theme[name]"></input>
-    <br></br>
-
+  <br></br>
   <input type="submit" value="Create Dream">
 </form>

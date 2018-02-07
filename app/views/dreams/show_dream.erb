@@ -4,9 +4,9 @@
 <%= @dream.story %>
 <h3> Themes </h3>
 <ul>
-    <% @dream.themes.each do |theme| %>
-        <li> <%=  theme.name %> </li>
-    <%  end %>
+  <% @dream.themes.each do |theme| %>
+      <li> <%=  theme.name %> </li>
+  <%  end %>
 </ul>
 
 <a href='/dreams/<%= @dream.id%>/edit'>Edit Dream</a>
