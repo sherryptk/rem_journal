@@ -1,5 +1,5 @@
 
-<h3> <%= @dream.date %> </h3>
+<h3> <%= @dream.date.strftime("%b %d, %Y") %> </h3>
 <h3> Dream Story: </h3>
 <%= @dream.story %>
 <h3> Themes </h3>

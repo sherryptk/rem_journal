@@ -39,11 +39,15 @@ class DreamsController < ApplicationController
   end
 
   get '/dreams/:id' do
-    if logged_in?
-      @dream = current_dream
-      erb :'/dreams/show_dream'
+    if current_dream
+      if logged_in?
+        @dream = current_dream
+        erb :'/dreams/show_dream'
+      else
+        redirect to '/login'
+      end
     else
-      redirect to '/login'
+      redirect to '/dreams'
     end
   end
 
