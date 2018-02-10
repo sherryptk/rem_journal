@@ -5,8 +5,8 @@
 <h2>Dreams</h2>
 
 <ul>
-<% Dream.all.each do |dream| %>
-    <li> <%= dream.date.strftime("%b %d, %Y") %>: <a href='/dreams/<%=dream.id%>'> <%= dream.story %> </a>  <p>--Author: <a href='/users/<%=dream.user.slug%>'><%= dream.user.username %></a></p></li>
+<% Dream.all.sort_by {|obj| obj.date}.each do |dream| %>
+    <li> <a href='/dreams/<%=dream.id%>'> <%= dream.date.strftime("%b %d, %Y") %> </a>: <%= dream.story %> <p>--Author: <a href='/users/<%=dream.user.slug%>'><%= dream.user.username %></a></p></li>
     <br>
 <% end %>
 </ul>

@@ -1,4 +1,3 @@
-
 <h3> <%= @dream.date.strftime("%b %d, %Y") %> </h3>
 <h3> Dream Story: </h3>
 <%= @dream.story %>
@@ -9,6 +8,7 @@
   <%  end %>
 </ul>
 
+<p><a href='/dreams/new'>New dream </a></p>
 <a href='/dreams/<%= @dream.id%>/edit'>Edit Dream</a>
 
 <br></br>
