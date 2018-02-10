@@ -10,6 +10,7 @@ class DreamsController < ApplicationController
       @user = current_user
       erb :'/dreams/dreams'
     else
+      flash[:message] = "You must first login"
       redirect '/login'
     end
   end

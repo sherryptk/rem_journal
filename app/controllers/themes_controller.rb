@@ -1,3 +1,0 @@
-class ThemesController < ApplicationController
-
-end

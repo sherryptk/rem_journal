@@ -48,9 +48,14 @@ class UsersController < ApplicationController
   end
 
   get '/logout' do
-    session.clear
-    flash[:message] = "You have successfully logged out!"
-    redirect '/login'
+    if !logged_in?
+      flash[:message] = "You must first login"
+      redirect '/login'
+    else
+      session.clear
+      flash[:message] = "You have successfully logged out!"
+      redirect '/login'
+    end
   end
 
   get '/users/:slug' do
