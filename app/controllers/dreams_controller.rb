@@ -64,7 +64,7 @@ class DreamsController < ApplicationController
   patch '/dreams/:id' do
     @dream = current_dream
 
-    if logged_in? && current_user.id == @dream.user.id
+    if valid_user
       id = @dream.id
       updated_themes = []
 
@@ -98,7 +98,7 @@ class DreamsController < ApplicationController
 
   delete '/dreams/:id/delete' do
     @dream = current_dream
-    if logged_in? && current_user.id == @dream.user.id
+    if valid_user
       @dream.destroy
       redirect to "/dreams"
     else

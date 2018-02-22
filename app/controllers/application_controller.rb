@@ -24,6 +24,10 @@ class ApplicationController < Sinatra::Base
     def current_dream
       Dream.all.find(params[:id])
     end
+
+    def valid_user
+      logged_in? && current_user.id == @dream.user.id
+    end
   end
 
 end
